@@ -1,1 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAU/USD Scalping with MT5 Mobile Integration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c1a25, #152a3a, #1c3b52);
+            color: #f0f0f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 25px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 150, 255, 0.3);
+            background: rgba(10, 25, 47, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #00aaff;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 170, 255, 0.3);
+        }
+        
+        .subtitle {
+            color: #88d3ff;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 25px;
+            margin-top: 20px;
+            background: rgba(20, 40, 60, 0.8);
+            border-radius: 50px;
+            font-size: 1.1rem;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff4444;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-indicator.connected {
+            background: #44ff44;
+            box-shadow: 0 0 10px #44ff44;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1200px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .chart-section {
+            background: rgba(15, 30, 45, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 150, 255, 0.2);
+        }
+        
+        .chart-title {
+            font-size: 1.8rem;
+            color: #00aaff;
+        }
+        
+        .price-display {
+            text-align: right;
+        }
+        
+        .current-price {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #44ff44;
+        }
+        
+        .price-change {
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+        
+        .chart-container {
+            height: 500px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .mt5-controls {
+            background: rgba(15, 30, 45, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #00aaff;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 150, 255, 0.2);
+        }
+        
+        .mt5-connection {
+            background: rgba(25, 40, 60, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .connection-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            color: #88d3ff;
+            font-weight: bold;
+        }
+        
+        input, select {
+            padding: 12px 15px;
+            background: rgba(40, 60, 80, 0.8);
+            border: 1px solid rgba(0, 150, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00aaff;
+            box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .quick-trade {
+            background: rgba(25, 40, 60, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .trade-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .trade-btn {
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(135deg, #00cc66, #00aa44);
+            color: white;
+        }
+        
+        .sell-btn {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+        }
+        
+        .trade-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .trade-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .account-info {
+            background: rgba(25, 40, 60, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: rgba(40, 60, 80, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .info-label {
+            color: #88d3ff;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #44ff44;
+        }
+        
+        .mt5-qr-section {
+            text-align: center;
+            padding: 20px;
+            background: rgba(25, 40, 60, 0.8);
+            border-radius: 10px;
+            margin-top: auto;
+        }
+        
+        .qr-container {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .qr-placeholder {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(45deg, #eee 25%, #ddd 25%, #ddd 50%, #eee 50%, #eee 75%, #ddd 75%, #ddd 100%);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .stat-card {
+            background: rgba(15, 30, 45, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 170, 255, 0.4);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #00aaff;
+            margin-bottom: 15px;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #44ff44;
+        }
+        
+        .stat-label {
+            color: #88d3ff;
+            font-size: 1.1rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #00aaff, #0088cc);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 170, 255, 0.3);
+        }
+        
+        .control-btn.secondary {
+            background: linear-gradient(135deg, #666, #444);
+        }
+        
+        .control-btn.danger {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #88d3ff;
+            font-size: 0.9rem;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 150, 255, 0.2);
+            line-height: 1.6;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: white;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .notification.success {
+            background: linear-gradient(135deg, #00cc66, #00aa44);
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+        }
+        
+        .notification.info {
+            background: linear-gradient(135deg, #00aaff, #0088cc);
+        }
+        
+        .notification.warning {
+            background: linear-gradient(135deg, #ffaa00, #cc8800);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .signals-log {
+            background: rgba(15, 30, 45, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(25, 40, 60, 0.6);
+            border-radius: 8px;
+            border-left: 4px solid #00aaff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .log-entry.buy {
+            border-left-color: #00cc66;
+        }
+        
+        .log-entry.sell {
+            border-left-color: #ff4444;
+        }
+        
+        .log-time {
+            color: #88d3ff;
+            font-size: 0.9rem;
+        }
+        
+        .log-action {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .log-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .status-success {
+            background: rgba(0, 204, 102, 0.2);
+            color: #44ff44;
+        }
+        
+        .status-pending {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+        }
+        
+        .status-error {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff8888;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 40, 60, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 170, 255, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 170, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-mobile-alt"></i> XAU/USD Scalping with MT5 Mobile Integration</h1>
+            <p class="subtitle">Connect directly to your MT5 mobile app for live trading signals and automated execution</p>
+            <div class="connection-status">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusText">Disconnected from MT5</span>
+            </div>
+        </header>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-value" id="currentPrice">$2,345.67</div>
+                <div class="stat-label">Live XAU/USD Price</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-signal"></i>
+                </div>
+                <div class="stat-value" id="signalCount">0</div>
+                <div class="stat-label">Signals Generated</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-value" id="winRate">0%</div>
+                <div class="stat-label">Win Rate</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="stat-value" id="totalProfit">$0.00</div>
+                <div class="stat-label">Total Profit</div>
+            </div>
+        </div>
+        
+        <div class="dashboard">
+            <div class="chart-section">
+                <div class="chart-header">
+                    <div class="chart-title">XAU/USD Live Price Chart</div>
+                    <div class="price-display">
+                        <div class="current-price" id="livePrice">$2,345.67</div>
+                        <div class="price-change" id="priceChange">+0.00% Today</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="mt5-controls">
+                <h2 class="section-title"><i class="fas fa-mobile-alt"></i> MT5 Mobile Connection</h2>
+                
+                <div class="mt5-connection">
+                    <h3><i class="fas fa-plug"></i> Connection Settings</h3>
+                    <div class="connection-form">
+                        <div class="form-group">
+                            <label for="serverSelect">MT5 Server:</label>
+                            <select id="serverSelect">
+                                <option value="">Select your broker</option>
+                                <option value="icmarkets">IC Markets</option>
+                                <option value="xm">XM</option>
+                                <option value="exness">Exness</option>
+                                <option value="fbs">FBS</option>
+                                <option value="hotforex">HotForex</option>
+                                <option value="fxpro">FxPro</option>
+                                <option value="other">Other (Custom)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="accountId">Account ID:</label>
+                                <input type="text" id="accountId" placeholder="e.g., 12345678">
+                            </div>
+                            <div class="form-group">
+                                <label for="accountPassword">Password:</label>
+                                <input type="password" id="accountPassword" placeholder="Your MT5 password">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customServer">Custom Server (if Other selected):</label>
+                            <input type="text" id="customServer" placeholder="e.g., MetaQuotes-Demo" disabled>
+                        </div>
+                        
+                        <button class="control-btn" id="connectBtn">
+                            <i class="fas fa-link"></i> Connect to MT5
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="quick-trade">
+                    <h3><i class="fas fa-bolt"></i> Quick Trade</h3>
+                    <div class="form-group">
+                        <label for="tradeVolume">Trade Volume (Lots):</label>
+                        <input type="number" id="tradeVolume" min="0.01" max="10" step="0.01" value="0.10">
+                    </div>
+                    
+                    <div class="trade-buttons">
+                        <button class="trade-btn buy-btn" id="buyBtn">
+                            <i class="fas fa-arrow-up"></i> BUY XAU/USD
+                        </button>
+                        <button class="trade-btn sell-btn" id="sellBtn">
+                            <i class="fas fa-arrow-down"></i> SELL XAU/USD
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="account-info">
+                    <h3><i class="fas fa-wallet"></i> Account Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Balance</div>
+                            <div class="info-value" id="accountBalance">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Equity</div>
+                            <div class="info-value" id="accountEquity">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Free Margin</div>
+                            <div class="info-value" id="freeMargin">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Open Trades</div>
+                            <div class="info-value" id="openTrades">0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt5-qr-section">
+                    <h3><i class="fas fa-qrcode"></i> Mobile Connection QR Code</h3>
+                    <p>Scan with MT5 mobile app to sync positions</p>
+                    <div class="qr-container">
+                        <div class="qr-placeholder">
+                            Generate QR Code<br>After Connection
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #88d3ff;">
+                        <i class="fas fa-info-circle"></i> QR code syncs your MT5 mobile with this dashboard
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="signals-log">
+            <h3><i class="fas fa-history"></i> Trading Activity Log</h3>
+            <div id="activityLog">
+                <div class="log-entry">
+                    <div class="log-time">--:--:--</div>
+                    <div class="log-action">Waiting for connection...</div>
+                    <div class="log-status status-pending">IDLE</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="startAutoBtn">
+                <i class="fas fa-robot"></i> Start Auto Trading
+            </button>
+            <button class="control-btn secondary" id="stopAutoBtn" disabled>
+                <i class="fas fa-stop-circle"></i> Stop Auto Trading
+            </button>
+            <button class="control-btn secondary" id="refreshBtn">
+                <i class="fas fa-sync-alt"></i> Refresh Data
+            </button>
+            <button class="control-btn danger" id="disconnectBtn">
+                <i class="fas fa-unlink"></i> Disconnect
+            </button>
+        </div>
+        
+        <div class="footer">
+            <p><strong>⚠️ Important Security Notice:</strong> This web application uses a secure bridge to connect with MT5 mobile. Never share your MT5 credentials with untrusted sources.</p>
+            <p>© 2023 XAU/USD MT5 Mobile Integration System | For educational purposes only | Trading involves risk</p>
+            <p style="margin-top: 15px; color: #44ff44;">
+                <i class="fas fa-shield-alt"></i> Connection is secured via WebSocket bridge
+            </p>
+        </div>
+    </div>
 
+    <!-- WebSocket Bridge Script -->
+    <script>
+        // Application State
+        const state = {
+            isConnected: false,
+            isAutoTrading: false,
+            ws: null,
+            chart: null,
+            priceData: [],
+            signals: [],
+            trades: [],
+            accountInfo: null,
+            updateInterval: null
+        };
+        
+        // DOM Elements
+        const statusIndicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const connectBtn = document.getElementById('connectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const startAutoBtn = document.getElementById('startAutoBtn');
+        const stopAutoBtn = document.getElementById('stopAutoBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const buyBtn = document.getElementById('buyBtn');
+        const sellBtn = document.getElementById('sellBtn');
+        const serverSelect = document.getElementById('serverSelect');
+        const accountId = document.getElementById('accountId');
+        const accountPassword = document.getElementById('accountPassword');
+        const customServer = document.getElementById('customServer');
+        const tradeVolume = document.getElementById('tradeVolume');
+        const currentPriceEl = document.getElementById('currentPrice');
+        const livePriceEl = document.getElementById('livePrice');
+        const priceChangeEl = document.getElementById('priceChange');
+        const signalCountEl = document.getElementById('signalCount');
+        const winRateEl = document.getElementById('winRate');
+        const totalProfitEl = document.getElementById('totalProfit');
+        const accountBalanceEl = document.getElementById('accountBalance');
+        const accountEquityEl = document.getElementById('accountEquity');
+        const freeMarginEl = document.getElementById('freeMargin');
+        const openTradesEl = document.getElementById('openTrades');
+        const activityLog = document.getElementById('activityLog');
+        
+        // Initialize the application
+        function init() {
+            // Initialize chart
+            initChart();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Simulate price updates
+            startPriceUpdates();
+            
+            // Load demo data
+            loadDemoData();
+            
+            // Update UI
+            updateUI();
+        }
+        
+        // Initialize price chart
+        function initChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            
+            // Generate initial price data
+            const labels = [];
+            const prices = [];
+            let price = 2345.67;
+            const now = new Date();
+            
+            for (let i = 60; i >= 0; i--) {
+                const time = new Date(now.getTime() - i * 60000);
+                labels.push(time.getHours().toString().padStart(2, '0') + ':' + time.getMinutes().toString().padStart(2, '0'));
+                
+                if (i === 60) {
+                    prices.push(price);
+                } else {
+                    price += (Math.random() - 0.5) * 3;
+                    prices.push(price);
+                }
+            }
+            
+            state.priceData = prices;
+            
+            state.chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'XAU/USD',
+                        data: prices,
+                        borderColor: '#00aaff',
+                        backgroundColor: 'rgba(0, 170, 255, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#88d3ff',
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(15, 30, 45, 0.9)',
+                            titleColor: '#00aaff',
+                            bodyColor: '#f0f0f0',
+                            borderColor: '#00aaff',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 150, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#88d3ff',
+                                maxTicksLimit: 10
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(0, 150, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#88d3ff',
+                                callback: function(value) {
+                                    return '$' + value.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Server select change
+            serverSelect.addEventListener('change', function() {
+                customServer.disabled = this.value !== 'other';
+                if (this.value !== 'other') {
+                    customServer.value = '';
+                }
+            });
+            
+            // Connect button
+            connectBtn.addEventListener('click', connectToMT5);
+            
+            // Disconnect button
+            disconnectBtn.addEventListener('click', disconnectFromMT5);
+            
+            // Auto trading buttons
+            startAutoBtn.addEventListener('click', startAutoTrading);
+            stopAutoBtn.addEventListener('click', stopAutoTrading);
+            
+            // Refresh button
+            refreshBtn.addEventListener('click', refreshData);
+            
+            // Trade buttons
+            buyBtn.addEventListener('click', () => executeTrade('buy'));
+            sellBtn.addEventListener('click', () => executeTrade('sell'));
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'b') {
+                    e.preventDefault();
+                    executeTrade('buy');
+                }
+                if (e.ctrlKey && e.key === 's') {
+                    e.preventDefault();
+                    executeTrade('sell');
+                }
+                if (e.key === 'Escape') {
+                    stopAutoTrading();
+                }
+            });
+        }
+        
+        // Connect to MT5 (Simulated)
+        function connectToMT5() {
+            const server = serverSelect.value;
+            const account = accountId.value.trim();
+            const password = accountPassword.value.trim();
+            
+            if (!server || server === '') {
+                showNotification('Please select your MT5 server', 'error');
+                return;
+            }
+            
+            if (!account || !password) {
+                showNotification('Please enter your account ID and password', 'error');
+                return;
+            }
+            
+            // Show connecting status
+            updateConnectionStatus('connecting', 'Connecting to MT5...');
+            
+            // Simulate connection delay
+            setTimeout(() => {
+                // In real implementation, this would connect via WebSocket to a bridge server
+                // that communicates with MT5 mobile through local network or push notifications
+                
+                // For demo purposes, simulate successful connection
+                state.isConnected = true;
+                updateConnectionStatus('connected', 'Connected to MT5');
+                
+                // Update account info
+                updateAccountInfo();
+                
+                // Generate QR code (simulated)
+                generateQRCode();
+                
+                // Enable trading buttons
+                buyBtn.disabled = false;
+                sellBtn.disabled = false;
+                disconnectBtn.disabled = false;
+                startAutoBtn.disabled = false;
+                
+                // Add to activity log
+                addLogEntry('Connected to MT5 server', 'success');
+                
+                showNotification('Successfully connected to MT5!', 'success');
+                
+                // Start simulated price streaming
+                startPriceStreaming();
+                
+            }, 2000);
+        }
+        
+        // Disconnect from MT5
+        function disconnectFromMT5() {
+            if (state.ws && state.ws.readyState === WebSocket.OPEN) {
+                state.ws.close();
+            }
+            
+            state.isConnected = false;
+            state.isAutoTrading = false;
+            
+            updateConnectionStatus('disconnected', 'Disconnected from MT5');
+            
+            // Disable trading buttons
+            buyBtn.disabled = true;
+            sellBtn.disabled = true;
+            disconnectBtn.disabled = true;
+            startAutoBtn.disabled = true;
+            stopAutoBtn.disabled = true;
+            
+            // Clear account info
+            clearAccountInfo();
+            
+            // Add to activity log
+            addLogEntry('Disconnected from MT5', 'info');
+            
+            showNotification('Disconnected from MT5', 'info');
+        }
+        
+        // Start auto trading
+        function startAutoTrading() {
+            if (!state.isConnected) {
+                showNotification('Please connect to MT5 first', 'error');
+                return;
+            }
+            
+            state.isAutoTrading = true;
+            startAutoBtn.disabled = true;
+            stopAutoBtn.disabled = false;
+            
+            // Start generating automatic signals
+            startSignalGeneration();
+            
+            addLogEntry('Auto trading started', 'success');
+            showNotification('Auto trading activated! Signals will be executed automatically.', 'success');
+        }
+        
+        // Stop auto trading
+        function stopAutoTrading() {
+            state.isAutoTrading = false;
+            startAutoBtn.disabled = false;
+            stopAutoBtn.disabled = true;
+            
+            // Stop signal generation
+            if (state.signalInterval) {
+                clearInterval(state.signalInterval);
+            }
+            
+            addLogEntry('Auto trading stopped', 'info');
+            showNotification('Auto trading deactivated', 'info');
+        }
+        
+        // Execute a trade
+        function executeTrade(type) {
+            if (!state.isConnected) {
+                showNotification('Please connect to MT5 first', 'error');
+                return;
+            }
+            
+            const volume = parseFloat(tradeVolume.value) || 0.10;
+            const currentPrice = state.priceData[state.priceData.length - 1];
+            
+            // In real implementation, this would send trade request via WebSocket
+            // For demo, simulate trade execution
+            
+            const trade = {
+                id: Date.now(),
+                type: type,
+                symbol: 'XAUUSD',
+                volume: volume,
+                price: currentPrice,
+                time: new Date().toLocaleTimeString(),
+                status: 'executed'
+            };
+            
+            state.trades.push(trade);
+            
+            // Update account info
+            updateAccountInfo();
+            
+            // Add to activity log
+            const action = type === 'buy' ? 'BUY XAU/USD' : 'SELL XAU/USD';
+            addLogEntry(`${action} @ $${currentPrice.toFixed(2)}`, 'success');
+            
+            // Update stats
+            updateStats();
+            
+            // Show notification
+            showNotification(`Trade executed: ${type.toUpperCase()} ${volume} lots @ $${currentPrice.toFixed(2)}`, 'success');
+            
+            // In real implementation, this would send to MT5 via WebSocket
+            // sendToMT5('execute_trade', trade);
+        }
+        
+        // Refresh data
+        function refreshData() {
+            if (state.isConnected) {
+                updateAccountInfo();
+                addLogEntry('Data refreshed', 'info');
+                showNotification('Account data refreshed', 'info');
+            }
+        }
+        
+        // Start simulated price updates
+        function startPriceUpdates() {
+            setInterval(() => {
+                const currentPrice = state.priceData[state.priceData.length - 1];
+                const change = (Math.random() - 0.5) * 4;
+                const newPrice = currentPrice + change;
+                
+                state.priceData.push(newPrice);
+                state.priceData.shift();
+                
+                // Update chart
+                state.chart.data.datasets[0].data = state.priceData;
+                
+                // Update labels (time)
+                const now = new Date();
+                const labels = [];
+                for (let i = 60; i >= 0; i--) {
+                    const time = new Date(now.getTime() - i * 60000);
+                    labels.push(time.getHours().toString().padStart(2, '0') + ':' + time.getMinutes().toString().padStart(2, '0'));
+                }
+                state.chart.data.labels = labels;
+                
+                state.chart.update('none');
+                
+                // Update price displays
+                updatePriceDisplay(newPrice);
+                
+                // Generate signal if auto trading is active
+                if (state.isAutoTrading && Math.random() > 0.7) {
+                    generateSignal(newPrice);
+                }
+                
+            }, 5000); // Update every 5 seconds
+        }
+        
+        // Start price streaming (simulated WebSocket)
+        function startPriceStreaming() {
+            // In real implementation, this would connect to price streaming WebSocket
+            console.log('Price streaming started (simulated)');
+        }
+        
+        // Start signal generation
+        function startSignalGeneration() {
+            // Generate initial signal
+            const currentPrice = state.priceData[state.priceData.length - 1];
+            generateSignal(currentPrice);
+            
+            // Generate signals periodically
+            state.signalInterval = setInterval(() => {
+                const price = state.priceData[state.priceData.length - 1];
+                if (Math.random() > 0.5) {
+                    generateSignal(price);
+                }
+            }, 30000); // Every 30 seconds
+        }
+        
+        // Generate trading signal
+        function generateSignal(price) {
+            const signalType = Math.random() > 0.5 ? 'buy' : 'sell';
+            const signalStrength = Math.random() > 0.7 ? 'strong' : Math.random() > 0.4 ? 'medium' : 'weak';
+            
+            const signal = {
+                id: Date.now(),
+                type: signalType,
+                price: price,
+                strength: signalStrength,
+                time: new Date().toLocaleTimeString()
+            };
+            
+            state.signals.push(signal);
+            
+            // Update signal count
+            signalCountEl.textContent = state.signals.length;
+            
+            // Calculate win rate
+            const winRate = state.signals.length > 0 ? 
+                Math.floor((state.signals.filter(s => s.strength === 'strong').length / state.signals.length) * 100) : 0;
+            winRateEl.textContent = winRate + '%';
+            
+            // Add to activity log
+            addLogEntry(`Signal: ${signalType.toUpperCase()} XAU/USD (${signalStrength})`, 'info');
+            
+            // If auto trading is active, execute the signal
+            if (state.isAutoTrading && signalStrength === 'strong') {
+                // Wait 2 seconds then execute
+                setTimeout(() => {
+                    executeTrade(signalType);
+                }, 2000);
+            }
+            
+            // Show notification for strong signals
+            if (signalStrength === 'strong') {
+                showNotification(`STRONG ${signalType.toUpperCase()} SIGNAL detected!`, 'warning');
+            }
+        }
+        
+        // Update connection status UI
+        function updateConnectionStatus(status, message) {
+            statusIndicator.className = 'status-indicator';
+            statusText.textContent = message;
+            
+            switch(status) {
+                case 'connected':
+                    statusIndicator.classList.add('connected');
+                    break;
+                case 'connecting':
+                    statusIndicator.style.background = '#ffaa00';
+                    break;
+                case 'disconnected':
+                    statusIndicator.style.background = '#ff4444';
+                    break;
+            }
+        }
+        
+        // Update price display
+        function updatePriceDisplay(price) {
+            const formattedPrice = '$' + price.toFixed(2);
+            currentPriceEl.textContent = formattedPrice;
+            livePriceEl.textContent = formattedPrice;
+            
+            // Calculate daily change
+            const openPrice = state.priceData[0];
+            const change = price - openPrice;
+            const changePercent = (change / openPrice * 100).toFixed(2);
+            
+            const changeText = `${change >= 0 ? '+' : ''}${change.toFixed(2)} (${changePercent}%)`;
+            priceChangeEl.textContent = changeText;
+            priceChangeEl.style.color = change >= 0 ? '#44ff44' : '#ff4444';
+        }
+        
+        // Update account information
+        function updateAccountInfo() {
+            // Simulated account data
+            const balance = 10000 + (Math.random() * 5000);
+            const equity = balance + (Math.random() * 2000 - 1000);
+            const margin = equity * 0.3;
+            const freeMargin = equity - margin;
+            const trades = Math.floor(Math.random() * 5);
+            
+            accountBalanceEl.textContent = '$' + balance.toFixed(2);
+            accountEquityEl.textContent = '$' + equity.toFixed(2);
+            freeMarginEl.textContent = '$' + freeMargin.toFixed(2);
+            openTradesEl.textContent = trades;
+            
+            // Update total profit
+            const profit = equity - 10000;
+            totalProfitEl.textContent = '$' + profit.toFixed(2);
+            totalProfitEl.style.color = profit >= 0 ? '#44ff44' : '#ff4444';
+        }
+        
+        // Clear account information
+        function clearAccountInfo() {
+            accountBalanceEl.textContent = '$0.00';
+            accountEquityEl.textContent = '$0.00';
+            freeMarginEl.textContent = '$0.00';
+            openTradesEl.textContent = '0';
+            totalProfitEl.textContent = '$0.00';
+        }
+        
+        // Generate QR code (simulated)
+        function generateQRCode() {
+            const qrPlaceholder = document.querySelector('.qr-placeholder');
+            qrPlaceholder.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #333; margin-bottom: 10px;">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666;">
+                        MT5 Connected<br>
+                        Sync Active
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Update stats
+        function updateStats() {
+            // This would be calculated from actual trade history
+            // For demo, use simulated data
+        }
+        
+        // Add entry to activity log
+        function addLogEntry(message, type) {
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type === 'buy' ? 'buy' : type === 'sell' ? 'sell' : ''}`;
+            
+            let statusClass = 'status-pending';
+            let statusText = 'PENDING';
+            
+            if (type === 'success') {
+                statusClass = 'status-success';
+                statusText = 'SUCCESS';
+            } else if (type === 'error') {
+                statusClass = 'status-error';
+                statusText = 'ERROR';
+            }
+            
+            entry.innerHTML = `
+                <div class="log-time">${time}</div>
+                <div class="log-action">${message}</div>
+                <div class="log-status ${statusClass}">${statusText}</div>
+            `;
+            
+            activityLog.insertBefore(entry, activityLog.firstChild);
+            
+            // Keep only last 10 entries
+            while (activityLog.children.length > 10) {
+                activityLog.removeChild(activityLog.lastChild);
+            }
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existing = document.querySelectorAll('.notification');
+            existing.forEach(n => {
+                n.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => n.remove(), 300);
+            });
+            
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${getNotificationIcon(type)}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+        
+        // Get notification icon
+        function getNotificationIcon(type) {
+            switch(type) {
+                case 'success': return 'check-circle';
+                case 'error': return 'exclamation-circle';
+                case 'warning': return 'exclamation-triangle';
+                default: return 'info-circle';
+            }
+        }
+        
+        // Update UI state
+        function updateUI() {
+            // Update button states based on connection status
+            buyBtn.disabled = !state.isConnected;
+            sellBtn.disabled = !state.isConnected;
+            disconnectBtn.disabled = !state.isConnected;
+            startAutoBtn.disabled = !state.isConnected;
+            stopAutoBtn.disabled = !state.isAutoTrading;
+        }
+        
+        // Load demo data
+        function loadDemoData() {
+            // Add some demo log entries
+            setTimeout(() => {
+                addLogEntry('System initialized and ready', 'success');
+            }, 1000);
+            
+            setTimeout(() => {
+                addLogEntry('Connect to MT5 to start trading', 'info');
+            }, 2000);
+        }
+        
+        // Initialize the application
+        window.addEventListener('DOMContentLoaded', init);
+        
+        // Real WebSocket Implementation Template
+        // This is how you would actually connect to a bridge server
+        function connectWebSocket() {
+            /*
+            // Real implementation would look like this:
+            state.ws = new WebSocket('wss://your-bridge-server.com/mt5');
+            
+            state.ws.onopen = function() {
+                console.log('WebSocket connected');
+                state.isConnected = true;
+                updateConnectionStatus('connected', 'Connected to MT5 Bridge');
+                
+                // Authenticate with MT5 credentials
+                state.ws.send(JSON.stringify({
+                    type: 'auth',
+                    server: serverSelect.value,
+                    account: accountId.value,
+                    password: accountPassword.value
+                }));
+            };
+            
+            state.ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                
+                switch(data.type) {
+                    case 'auth_success':
+                        showNotification('MT5 authentication successful', 'success');
+                        updateAccountInfo(data.account_info);
+                        break;
+                        
+                    case 'price_update':
+                        updatePrice(data.symbol, data.price);
+                        break;
+                        
+                    case 'trade_executed':
+                        addLogEntry(`Trade ${data.ticket} executed`, 'success');
+                        updateAccountInfo(data.account_info);
+                        break;
+                        
+                    case 'error':
+                        showNotification(data.message, 'error');
+                        break;
+                }
+            };
+            
+            state.ws.onclose = function() {
+                state.isConnected = false;
+                updateConnectionStatus('disconnected', 'Disconnected from MT5 Bridge');
+                showNotification('Connection lost', 'error');
+            };
+            */
+        }
+        
+        // Bridge Server Information for Real Implementation
+        /*
+        To connect to MT5 mobile, you need a bridge server that:
+        
+        1. Runs on your local computer or a VPS
+        2. Connects to MT5 via MetaTrader's MQL5 API
+        3. Provides a WebSocket interface for the web app
+        4. Can push notifications to MT5 mobile app
+        
+        Popular solutions for MT5 bridge:
+        - MetaApi (cloud service)
+        - Native MQL5 WebSocket libraries
+        - Python MT5 bridge using MetaTrader5 Python package
+        - Node.js MT5 bridge
+        
+        For mobile integration specifically:
+        - Use MT5's push notification system
+        - Create a companion app that runs on your phone
+        - Use local network discovery for direct connection
+        */
+    </script>
+</body>
+</html>
