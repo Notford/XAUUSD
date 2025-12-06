@@ -89,6 +89,97 @@
             100% { opacity: 1; }
         }
         
+        .account-setup {
+            background: rgba(15, 30, 50, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+        }
+        
+        .setup-title {
+            font-size: 1.8rem;
+            color: #00ccff;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .account-form {
+            display: grid;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            color: #88ddff;
+            font-weight: bold;
+        }
+        
+        input, select {
+            padding: 14px 16px;
+            background: rgba(30, 50, 80, 0.8);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00ccff;
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+        }
+        
+        .account-select {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .account-option {
+            background: rgba(25, 45, 70, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .account-option:hover {
+            border-color: #00ccff;
+            transform: translateY(-2px);
+        }
+        
+        .account-option.selected {
+            border-color: #44ff44;
+            background: rgba(25, 45, 70, 1);
+        }
+        
+        .account-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .account-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .account-details {
+            color: #88ddff;
+            font-size: 0.9rem;
+        }
+        
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -271,32 +362,6 @@
             gap: 20px;
         }
         
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        label {
-            color: #88ddff;
-            font-weight: bold;
-        }
-        
-        input, select {
-            padding: 14px 16px;
-            background: rgba(30, 50, 80, 0.8);
-            border: 1px solid rgba(0, 200, 255, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #00ccff;
-            box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
-        }
-        
         .trade-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -338,200 +403,6 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-        }
-        
-        .scalping-controls {
-            background: rgba(15, 30, 50, 0.9);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 200, 255, 0.2);
-        }
-        
-        .signal-log {
-            background: rgba(15, 30, 50, 0.9);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 200, 255, 0.2);
-            grid-column: 1 / -1;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .signals-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .signal-card {
-            background: rgba(25, 45, 70, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #00ccff;
-            transition: all 0.3s;
-        }
-        
-        .signal-card.buy {
-            border-left-color: #00cc66;
-        }
-        
-        .signal-card.sell {
-            border-left-color: #ff4444;
-        }
-        
-        .signal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .signal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .signal-type {
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-        
-        .signal-type.buy {
-            color: #00cc66;
-        }
-        
-        .signal-type.sell {
-            color: #ff4444;
-        }
-        
-        .signal-time {
-            color: #88ddff;
-            font-size: 0.9rem;
-        }
-        
-        .signal-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .signal-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .detail-label {
-            color: #88ddff;
-        }
-        
-        .detail-value {
-            font-weight: bold;
-        }
-        
-        .scalping-settings {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .setting-group {
-            background: rgba(25, 45, 70, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        
-        .setting-title {
-            color: #00ccff;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .slider-container {
-            margin-top: 15px;
-        }
-        
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            color: #88ddff;
-        }
-        
-        input[type="range"] {
-            width: 100%;
-            height: 8px;
-            -webkit-appearance: none;
-            background: rgba(30, 50, 80, 0.8);
-            border-radius: 4px;
-            outline: none;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #00ccff;
-            cursor: pointer;
-        }
-        
-        .switch-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-        
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: #00cc66;
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(26px);
         }
         
         .control-buttons {
@@ -691,6 +562,63 @@
             font-size: 0.9rem;
             color: #44ff44;
         }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .account-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .connect-btn {
+            background: linear-gradient(135deg, #00cc66, #00aa44);
+            color: white;
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(135deg, #00ccff, #0088cc);
+            color: white;
+        }
+        
+        .debug-info {
+            background: rgba(25, 45, 70, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #88ddff;
+        }
+        
+        .debug-toggle {
+            cursor: pointer;
+            color: #00ccff;
+            text-decoration: underline;
+        }
+        
+        .debug-content {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
     </style>
 </head>
 <body>
@@ -704,211 +632,177 @@
             </div>
         </header>
         
-        <div class="dashboard-grid">
-            <div class="trading-section">
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <div class="chart-title">XAU/USD Live Price Chart</div>
-                        <div class="price-info">
-                            <div class="live-price" id="livePrice">$0.00</div>
-                            <div class="price-details" id="priceDetails">Loading...</div>
-                        </div>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="priceChart"></canvas>
-                    </div>
+        <!-- Account Setup Section -->
+        <div class="account-setup" id="accountSetup">
+            <h2 class="setup-title"><i class="fas fa-user-circle"></i> Select Your MT5 Account</h2>
+            <p style="text-align: center; color: #88ddff; margin-bottom: 20px;">
+                Choose your MT5 account from the list below or enter your account ID manually
+            </p>
+            
+            <div class="account-form">
+                <div class="form-group">
+                    <label for="manualAccountId">Or Enter Account ID Manually:</label>
+                    <input type="text" id="manualAccountId" placeholder="Enter your MT5 account ID">
                 </div>
                 
-                <div class="account-panel">
-                    <div class="panel-title">
-                        <i class="fas fa-wallet"></i> MT5 Account
-                    </div>
-                    <div class="metaapi-info">
-                        <div>Connected via MetaApi</div>
-                        <div class="token-display" id="tokenDisplay">Token: f4b4d1e0-1869-426c-b002-958d92865b0d</div>
-                    </div>
-                    <div class="account-summary">
-                        <div class="summary-item">
-                            <div class="summary-label">Balance</div>
-                            <div class="summary-value" id="accountBalance">$0.00</div>
-                        </div>
-                        <div class="summary-item">
-                            <div class="summary-label">Equity</div>
-                            <div class="summary-value" id="accountEquity">$0.00</div>
-                        </div>
-                        <div class="summary-item">
-                            <div class="summary-label">Margin</div>
-                            <div class="summary-value" id="accountMargin">$0.00</div>
-                        </div>
-                        <div class="summary-item">
-                            <div class="summary-label">Free Margin</div>
-                            <div class="summary-value" id="freeMargin">$0.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="panel-title" style="margin-top: 25px;">
-                        <i class="fas fa-list"></i> Open Positions
-                    </div>
-                    <div class="positions-list" id="positionsList">
+                <div class="form-group">
+                    <label>Select Account from MetaApi:</label>
+                    <div class="account-select" id="accountSelect">
                         <div class="loading">
                             <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading positions...</p>
+                            <p>Loading your MT5 accounts...</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="trading-panel">
-                    <div class="panel-title">
-                        <i class="fas fa-trade"></i> Quick Trade
-                    </div>
-                    <div class="trade-form">
-                        <div class="form-group">
-                            <label for="symbolSelect">Symbol:</label>
-                            <select id="symbolSelect">
-                                <option value="XAUUSD">XAU/USD (Gold)</option>
-                                <option value="EURUSD">EUR/USD</option>
-                                <option value="GBPUSD">GBP/USD</option>
-                                <option value="USDJPY">USD/JPY</option>
-                            </select>
+                <div class="account-actions">
+                    <button class="action-btn connect-btn" id="connectSelectedBtn">
+                        <i class="fas fa-plug"></i> Connect to Selected Account
+                    </button>
+                    <button class="action-btn refresh-btn" id="refreshAccountsBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh Account List
+                    </button>
+                </div>
+            </div>
+            
+            <div class="metaapi-info">
+                <div>Connected via MetaApi JWT Token</div>
+                <div class="token-display" id="tokenDisplay">eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9...</div>
+                <div style="margin-top: 10px; color: #ffaa00;">
+                    <i class="fas fa-info-circle"></i> Using JWT token format
+                </div>
+            </div>
+            
+            <div class="debug-info">
+                <div class="debug-toggle" id="debugToggle">
+                    <i class="fas fa-bug"></i> Show Debug Information
+                </div>
+                <div class="debug-content hidden" id="debugContent">
+                    Debug information will appear here...
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Dashboard (Initially Hidden) -->
+        <div id="mainDashboard" class="hidden">
+            <div class="dashboard-grid">
+                <div class="trading-section">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">XAU/USD Live Price Chart</div>
+                            <div class="price-info">
+                                <div class="live-price" id="livePrice">$0.00</div>
+                                <div class="price-details" id="priceDetails">Loading...</div>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="volumeInput">Volume (Lots):</label>
-                            <input type="number" id="volumeInput" min="0.01" max="10" step="0.01" value="0.10">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="stopLossInput">Stop Loss (pips):</label>
-                            <input type="number" id="stopLossInput" min="0" max="1000" step="1" value="50">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="takeProfitInput">Take Profit (pips):</label>
-                            <input type="number" id="takeProfitInput" min="0" max="1000" step="1" value="30">
-                        </div>
-                        
-                        <div class="trade-buttons">
-                            <button class="trade-btn buy-btn" id="buyBtn">
-                                <i class="fas fa-arrow-up"></i> BUY
-                            </button>
-                            <button class="trade-btn sell-btn" id="sellBtn">
-                                <i class="fas fa-arrow-down"></i> SELL
-                            </button>
+                        <div class="chart-wrapper">
+                            <canvas id="priceChart"></canvas>
                         </div>
                     </div>
                     
-                    <div class="panel-title" style="margin-top: 25px;">
-                        <i class="fas fa-cog"></i> Auto Trading
+                    <div class="account-panel">
+                        <div class="panel-title">
+                            <i class="fas fa-wallet"></i> MT5 Account: <span id="currentAccountName">Not Connected</span>
+                        </div>
+                        <div class="metaapi-info">
+                            <div>Connected via MetaApi</div>
+                            <div>Account ID: <span id="connectedAccountId" style="color: #44ff44;">Not connected</span></div>
+                            <button class="action-btn connect-btn" id="switchAccountBtn" style="margin-top: 10px; padding: 8px 15px;">
+                                <i class="fas fa-exchange-alt"></i> Switch Account
+                            </button>
+                        </div>
+                        <div class="account-summary">
+                            <div class="summary-item">
+                                <div class="summary-label">Balance</div>
+                                <div class="summary-value" id="accountBalance">$0.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Equity</div>
+                                <div class="summary-value" id="accountEquity">$0.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Margin</div>
+                                <div class="summary-value" id="accountMargin">$0.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Free Margin</div>
+                                <div class="summary-value" id="freeMargin">$0.00</div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-title" style="margin-top: 25px;">
+                            <i class="fas fa-list"></i> Open Positions
+                        </div>
+                        <div class="positions-list" id="positionsList">
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading positions...</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="switch-container">
-                        <span>Enable Auto Scalping</span>
-                        <label class="switch">
-                            <input type="checkbox" id="autoTradeToggle">
-                            <span class="slider"></span>
-                        </label>
+                    
+                    <div class="trading-panel">
+                        <div class="panel-title">
+                            <i class="fas fa-trade"></i> Quick Trade
+                        </div>
+                        <div class="trade-form">
+                            <div class="form-group">
+                                <label for="symbolSelect">Symbol:</label>
+                                <select id="symbolSelect">
+                                    <option value="XAUUSD">XAU/USD (Gold)</option>
+                                    <option value="EURUSD">EUR/USD</option>
+                                    <option value="GBPUSD">GBP/USD</option>
+                                    <option value="USDJPY">USD/JPY</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="volumeInput">Volume (Lots):</label>
+                                <input type="number" id="volumeInput" min="0.01" max="10" step="0.01" value="0.10">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="stopLossInput">Stop Loss (pips):</label>
+                                <input type="number" id="stopLossInput" min="0" max="1000" step="1" value="50">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="takeProfitInput">Take Profit (pips):</label>
+                                <input type="number" id="takeProfitInput" min="0" max="1000" step="1" value="30">
+                            </div>
+                            
+                            <div class="trade-buttons">
+                                <button class="trade-btn buy-btn" id="buyBtn">
+                                    <i class="fas fa-arrow-up"></i> BUY
+                                </button>
+                                <button class="trade-btn sell-btn" id="sellBtn">
+                                    <i class="fas fa-arrow-down"></i> SELL
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="scalping-controls">
-                <div class="panel-title">
-                    <i class="fas fa-robot"></i> Scalping Settings
-                </div>
-                
-                <div class="scalping-settings">
-                    <div class="setting-group">
-                        <div class="setting-title">Signal Parameters</div>
-                        <div class="slider-container">
-                            <div class="slider-label">
-                                <span>Signal Strength</span>
-                                <span id="strengthValue">Medium</span>
-                            </div>
-                            <input type="range" id="strengthSlider" min="1" max="3" step="1" value="2">
-                        </div>
-                        
-                        <div class="slider-container">
-                            <div class="slider-label">
-                                <span>Max Daily Trades</span>
-                                <span id="maxTradesValue">10</span>
-                            </div>
-                            <input type="range" id="maxTradesSlider" min="1" max="50" value="10">
-                        </div>
-                    </div>
-                    
-                    <div class="setting-group">
-                        <div class="setting-title">Risk Management</div>
-                        <div class="slider-container">
-                            <div class="slider-label">
-                                <span>Risk per Trade (%)</span>
-                                <span id="riskValue">2%</span>
-                            </div>
-                            <input type="range" id="riskSlider" min="0.5" max="5" step="0.5" value="2">
-                        </div>
-                        
-                        <div class="slider-container">
-                            <div class="slider-label">
-                                <span>Profit Target ($)</span>
-                                <span id="profitTargetValue">$500</span>
-                            </div>
-                            <input type="range" id="profitTargetSlider" min="100" max="5000" step="100" value="500">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="panel-title" style="margin-top: 25px;">
-                    <i class="fas fa-chart-bar"></i> Performance
-                </div>
-                <div class="account-summary">
-                    <div class="summary-item">
-                        <div class="summary-label">Today's P/L</div>
-                        <div class="summary-value" id="dailyPL">$0.00</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Win Rate</div>
-                        <div class="summary-value" id="winRate">0%</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Total Trades</div>
-                        <div class="summary-value" id="totalTrades">0</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Best Trade</div>
-                        <div class="summary-value" id="bestTrade">$0.00</div>
-                    </div>
-                </div>
+            <div class="control-buttons">
+                <button class="control-btn" id="refreshDataBtn">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+                <button class="control-btn success" id="generateSignalBtn">
+                    <i class="fas fa-bolt"></i> Generate Signal
+                </button>
+                <button class="control-btn danger" id="closeAllBtn">
+                    <i class="fas fa-times-circle"></i> Close All Trades
+                </button>
+                <button class="control-btn secondary" id="disconnectBtn">
+                    <i class="fas fa-sign-out-alt"></i> Disconnect
+                </button>
             </div>
-        </div>
-        
-        <div class="signal-log">
-            <div class="panel-title">
-                <i class="fas fa-bell"></i> Live Trading Signals
-            </div>
-            <div class="signals-container" id="signalsContainer">
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Generating signals...</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="control-buttons">
-            <button class="control-btn" id="connectBtn">
-                <i class="fas fa-plug"></i> Connect to MT5
-            </button>
-            <button class="control-btn secondary" id="refreshBtn">
-                <i class="fas fa-sync-alt"></i> Refresh Data
-            </button>
-            <button class="control-btn success" id="generateSignalBtn">
-                <i class="fas fa-bolt"></i> Generate Signal
-            </button>
-            <button class="control-btn danger" id="closeAllBtn">
-                <i class="fas fa-times-circle"></i> Close All Trades
-            </button>
         </div>
         
         <div class="footer">
             <p><strong>⚠️ Important:</strong> This system connects directly to your MT5 account via MetaApi. Trades will be executed in real-time. Use at your own risk.</p>
-            <p>© 2023 XAU/USD Scalping System | Powered by MetaApi | Token: f4b4d1e0-1869-426c-b002-958d92865b0d</p>
+            <p>© 2023 XAU/USD Scalping System | Powered by MetaApi</p>
             <p style="margin-top: 15px; color: #44ff44;">
                 <i class="fas fa-shield-alt"></i> Connection secured with MetaApi Cloud
             </p>
@@ -916,30 +810,41 @@
     </div>
 
     <script>
-        // MetaApi Configuration
-        const METAAPI_TOKEN = 'f4b4d1e0-1869-426c-b002-958d92865b0d';
+        // MetaApi Configuration - Using your JWT token
+        // Note: MetaApi SDK might expect the regular token, not JWT
+        // Let's try with both formats
+        const METAAPI_JWT_TOKEN = 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI3MDZmOThkNTcyYzc5ZmM5YzhkYWE0YjliZWI0MGJiOCIsImFjY2Vzc1J1bGVzIjpbeyJpZCI6InRyYWRpbmctYWNjb3VudC1tYW5hZ2VtZW50LWFwaSIsIm1ldGhvZHMiOlsidHJhZGluZy1hY2NvdW50LW1hbmFnZW1lbnQtYXBpOnJlc3Q6cHVibGljOio6KiJdLCJyb2xlcyI6WyJyZWFkZXIiLCJ3cml0ZXIiXSwicmVzb3VyY2VzIjpbIio6JFVTRVJfSUQkOioiXX0seyJpZCI6Im1ldGFhcGktcmVzdC1hcGkiLCJtZXRob2RzIjpbIm1ldGFhcGktYXBpOnJlc3Q6cHVibGljOio6KiJdLCJyb2xlcyI6WyJyZWFkZXIiLCJ3cml0ZXIiXSwicmVzb3VyY2VzIjpbIio6JFVTRVJfSUQkOioiXX0seyJpZCI6Im1ldGFhcGktcnBjLWFwaSIsIm1ldGhvZHMiOlsibWV0YWFwaS1hcGk6d3M6cHVibGljOio6KiJdLCJyb2xlcyI6WyJyZWFkZXIiLCJ3cml0ZXIiXSwicmVzb3VyY2VzIjpbIio6JFVTRVJfSUQkOioiXX0seyJpZCI6Im1ldGFhcGktcmVhbC10aW1lLXN0cmVhbWluZy1hcGkiLCJtZXRob2RzIjpbIm1ldGFhcGktYXBpOndzOnB1YmxpYzoqOioiXSwicm9sZXMiOlsicmVhZGVyIiwid3JpdGVyIl0sInJlc291cmNlcyI6WyIqOiRVU0VSX0lEJDoqIl19LHsiaWQiOiJtZXRhc3RhdHMtYXBpIiwibWV0aG9kcyI6WyJtZXRhc3RhdHMtYXBpOnJlc3Q6cHVibGljOio6KiJdLCJyb2xlcyI6WyJyZWFkZXIiLCJ3cml0ZXIiXSwicmVzb3VyY2VzIjpbIio6JFVTRVJfSUQkOioiXX0seyJpZCI6InJpc2stbWFuYWdlbWVudC1hcGkiLCJtZXRob2RzIjpbInJpc2stbWFuYWdlbWVudC1hcGk6cmVzdDpwdWJsaWM6KjoqIl0sInJvbGVzIjpbInJlYWRlciIsIndyaXRlciJdLCJyZXNvdXJjZXMiOlsiKjokVVNFUl9JRCQ6KiJdfSx7ImlkIjoiY29weWZhY3RvcnktYXBpIiwibWV0aG9kcyI6WyJjb3B5ZmFjdG9yeS1hcGk6cmVzdDpwdWJsaWM6KjoqIl0sInJvbGVzIjpbInJlYWRlciIsIndyaXRGVyJdLCJyZXNvdXJjZXMiOlsiKjokVVNFUl9JRCQ6KiJdfSx7ImlkIjoibXQtbWFuYWdlci1hcGkiLCJtZXRob2RzIjpbIm10LW1hbmFnZXItYXBpOnJlc3Q6ZGVhbGluZzoqOioiLCJtdC1tYW5hZ2VyLWFwaTpyZXN0OnB1YmxpYzoqOioiXSwicm9sZXMiOlsicmVhZGVyIiwid3JpdGVyIl0sInJlc291cmNlcyI6WyIqOiRVU0VSX0lEJDoqIl19LHsiaWQiOiJiaWxsaW5nLWFwaSIsIm1ldGhvZHMiOlsiYmlsbGluZy1hcGk6cmVzdDpwdWJsaWM6KjoqIl0sInJvbGVzIjpbInJlYWRlciJdLCJyZXNvdXJjZXMiOlsiKjokVVNFUl9JRCQ6KiJdfV0sImlnbm9yZVJhdGVMaW1pdHMiOmZhbHNlLCJ0b2tlbklkIjoiMjAyMTAyMTMiLCJpbXBlcnNvbmF0ZWQiOmZhbHNlLCJyZWFsVXNlcklkIjoiNzA2Zjk4ZDU3MmM3OWZjOWM4ZGFhNGI5YmViNDBiYjgiLCJpYXQiOjE3NjQ5OTExMTd9.adq9JbDrsBFDRDp_hUjKHtCUXKQcRVh_Hknosjf7A1ffVK2NHrJlYoJg9JfObM38M-9Foxg21yJ_67WcLJqtDwWni9I-p-Ndcio13Z_hkwNq4joAMHdSLmEPpHRveotGed3w_8DD-Itac9qo0mzV8RRuN2zDGweR99v4HST-eRMdJ-pr_UtGc4FqyWvg1mRIXeu1lDsvy-PkAXHSdKCCQOips5DAnefBadwwpkI_RL9ObcOx1_k5K4tQcYpHy4WhC5YtxUo6tHdHDHNJOCXVCyOJXIEb2ii5eMsPQxP6zde-eoJjSxR-3j28uxhdoh1ecaDF0vPAQqm9AG9mVhfzUkKwsOILt7TwNvoBuGvRFwtsr_lOjj2gTTkPZ7L0Q6PhmCanq4HRkufFZ_FaFeFnOX2V0_wFa1Imc7wbWr61_S_6nYN5KsaFOmNM44NONxvu0JVr6lJRIZkQLfIiorKQ2dlJ9PHjUvmRTx7cZo7DgGK77ugFd6zRYGk0Iw9Uu4VLZyJiDPGFN1J0ZOrIMArfowuUm_DPWYYkB7hjY5n7VqBbPlAzRcYzAClMFH7H4Okd81IseVqKIZElJIQ-UpkzvPpveGoWfi6JU-RCIhl4OrEW6BCMZumWzuqTKycnHmgkjkoy4p7I2kspeftT1sgngtxoOkA_UwaycdEY6luBhhs';
         
         // Application State
         const state = {
             metaApi: null,
+            accounts: [],
+            selectedAccount: null,
             account: null,
             connection: null,
             isConnected: false,
-            isAutoTrading: false,
             chart: null,
             priceData: [],
             signals: [],
             accountInfo: null,
             positions: [],
             lastPrice: null,
-            updateInterval: null,
-            signalInterval: null
+            updateInterval: null
         };
         
         // DOM Elements
+        const accountSetup = document.getElementById('accountSetup');
+        const mainDashboard = document.getElementById('mainDashboard');
         const statusDot = document.getElementById('statusDot');
         const statusText = document.getElementById('statusText');
         const tokenDisplay = document.getElementById('tokenDisplay');
+        const accountSelect = document.getElementById('accountSelect');
+        const manualAccountId = document.getElementById('manualAccountId');
+        const connectSelectedBtn = document.getElementById('connectSelectedBtn');
+        const refreshAccountsBtn = document.getElementById('refreshAccountsBtn');
+        const switchAccountBtn = document.getElementById('switchAccountBtn');
+        const currentAccountName = document.getElementById('currentAccountName');
+        const connectedAccountId = document.getElementById('connectedAccountId');
         const livePriceEl = document.getElementById('livePrice');
         const priceDetailsEl = document.getElementById('priceDetails');
         const accountBalanceEl = document.getElementById('accountBalance');
@@ -947,38 +852,48 @@
         const accountMarginEl = document.getElementById('accountMargin');
         const freeMarginEl = document.getElementById('freeMargin');
         const positionsListEl = document.getElementById('positionsList');
-        const dailyPLEl = document.getElementById('dailyPL');
-        const winRateEl = document.getElementById('winRate');
-        const totalTradesEl = document.getElementById('totalTrades');
-        const bestTradeEl = document.getElementById('bestTrade');
-        const signalsContainerEl = document.getElementById('signalsContainer');
-        const connectBtn = document.getElementById('connectBtn');
-        const refreshBtn = document.getElementById('refreshBtn');
+        const refreshDataBtn = document.getElementById('refreshDataBtn');
         const generateSignalBtn = document.getElementById('generateSignalBtn');
         const closeAllBtn = document.getElementById('closeAllBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
         const buyBtn = document.getElementById('buyBtn');
         const sellBtn = document.getElementById('sellBtn');
         const symbolSelect = document.getElementById('symbolSelect');
         const volumeInput = document.getElementById('volumeInput');
         const stopLossInput = document.getElementById('stopLossInput');
         const takeProfitInput = document.getElementById('takeProfitInput');
-        const autoTradeToggle = document.getElementById('autoTradeToggle');
-        const strengthSlider = document.getElementById('strengthSlider');
-        const maxTradesSlider = document.getElementById('maxTradesSlider');
-        const riskSlider = document.getElementById('riskSlider');
-        const profitTargetSlider = document.getElementById('profitTargetSlider');
-        const strengthValue = document.getElementById('strengthValue');
-        const maxTradesValue = document.getElementById('maxTradesValue');
-        const riskValue = document.getElementById('riskValue');
-        const profitTargetValue = document.getElementById('profitTargetValue');
+        const debugToggle = document.getElementById('debugToggle');
+        const debugContent = document.getElementById('debugContent');
+        
+        // Debug logging
+        function debugLog(message, data = null) {
+            const timestamp = new Date().toLocaleTimeString();
+            let logMessage = `[${timestamp}] ${message}`;
+            
+            if (data) {
+                logMessage += `\n${JSON.stringify(data, null, 2)}`;
+            }
+            
+            console.log(logMessage);
+            
+            // Update debug display
+            const currentContent = debugContent.textContent;
+            debugContent.textContent = logMessage + '\n\n' + currentContent;
+            
+            // Limit debug content length
+            const lines = debugContent.textContent.split('\n');
+            if (lines.length > 50) {
+                debugContent.textContent = lines.slice(0, 50).join('\n');
+            }
+        }
         
         // Initialize application
         async function init() {
-            console.log('Initializing MetaApi Scalping System...');
+            console.log('Initializing MetaApi Scalping System with JWT token...');
             
-            // Display token (masked for security)
-            const maskedToken = METAAPI_TOKEN.substring(0, 8) + '...' + METAAPI_TOKEN.substring(METAAPI_TOKEN.length - 8);
-            tokenDisplay.textContent = `Token: ${maskedToken}`;
+            // Display token (truncated for security)
+            const truncatedToken = METAAPI_JWT_TOKEN.substring(0, 50) + '...';
+            tokenDisplay.textContent = `Token: ${truncatedToken}`;
             
             // Initialize UI
             updateStatus('initializing', 'Initializing MetaApi...');
@@ -986,149 +901,284 @@
             initChart();
             
             try {
-                // Initialize MetaApi
-                state.metaApi = new MetaApi(METAAPI_TOKEN);
-                updateStatus('connecting', 'MetaApi SDK loaded');
+                // Initialize MetaApi with JWT token
+                debugLog('Attempting to initialize MetaApi with JWT token...');
                 
-                // Get accounts (you need to configure your account ID in MetaApi dashboard)
-                const accounts = await state.metaApi.metatraderAccountApi.getAccounts();
-                console.log('Available accounts:', accounts);
+                // Try to initialize MetaApi
+                state.metaApi = new MetaApi(METAAPI_JWT_TOKEN);
+                debugLog('MetaApi instance created');
                 
-                if (accounts && accounts.length > 0) {
-                    // Use the first account for demo
-                    const accountId = accounts[0].id;
-                    showNotification(`Found MT5 account: ${accountId}`, 'info');
-                    
-                    // Connect button will handle the actual connection
-                    updateStatus('ready', 'Ready to connect to MT5');
-                    connectBtn.disabled = false;
-                } else {
-                    updateStatus('error', 'No MT5 accounts found in MetaApi');
-                    showNotification('Please add your MT5 account to MetaApi dashboard first', 'error');
-                }
+                // Test connection by getting accounts
+                updateStatus('connecting', 'Testing MetaApi connection...');
+                await loadAccounts();
+                
+                updateStatus('ready', 'MetaApi connected successfully');
+                showNotification('MetaApi initialized successfully', 'success');
                 
             } catch (error) {
                 console.error('MetaApi initialization error:', error);
-                updateStatus('error', 'MetaApi initialization failed');
-                showNotification(`MetaApi error: ${error.message}`, 'error');
+                debugLog('MetaApi initialization error:', error);
+                updateStatus('error', `MetaApi init failed: ${error.message}`);
+                
+                // Check if it's a token format issue
+                if (error.message.includes('token') || error.message.includes('auth') || error.message.includes('401')) {
+                    showNotification('Token format issue. MetaApi may require a regular token, not JWT. Please check your MetaApi dashboard for the correct token.', 'error');
+                } else {
+                    showNotification(`MetaApi error: ${error.message}`, 'error');
+                }
             }
             
             // Start price simulation
             startPriceSimulation();
         }
         
-        // Connect to MT5 via MetaApi
-        async function connectToMT5() {
+        // Load accounts from MetaApi
+        async function loadAccounts() {
             try {
-                updateStatus('connecting', 'Connecting to MT5...');
-                connectBtn.disabled = true;
+                accountSelect.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading your MT5 accounts...</p></div>';
+                debugLog('Loading accounts from MetaApi...');
                 
-                // Get accounts
+                // Get all accounts
                 const accounts = await state.metaApi.metatraderAccountApi.getAccounts();
-                if (!accounts || accounts.length === 0) {
-                    throw new Error('No MT5 accounts found. Please add your account in MetaApi dashboard.');
+                state.accounts = accounts;
+                debugLog(`Found ${accounts.length} accounts`, accounts);
+                
+                if (accounts && accounts.length > 0) {
+                    // Display accounts
+                    let accountsHtml = '';
+                    accounts.forEach((acc, index) => {
+                        const isConnected = acc.connectionStatus === 'connected';
+                        const isDeployed = acc.state === 'DEPLOYED';
+                        const isEnabled = acc.enabled === true;
+                        
+                        accountsHtml += `
+                            <div class="account-option" data-account-id="${acc.id}" data-index="${index}">
+                                <div class="account-info">
+                                    <div>
+                                        <div class="account-name">${acc.name || `Account ${acc.login || 'N/A'}`}</div>
+                                        <div class="account-details">
+                                            ID: ${acc.id.substring(0, 8)}... • 
+                                            Login: ${acc.login || 'N/A'} • 
+                                            State: ${acc.state || 'N/A'} •
+                                            ${isConnected ? '🟢 Connected' : '🔴 Disconnected'} •
+                                            ${isDeployed ? 'Deployed' : 'Not Deployed'} •
+                                            ${isEnabled ? 'Enabled' : 'Disabled'}
+                                        </div>
+                                    </div>
+                                    <div style="color: ${isConnected ? '#44ff44' : '#ff4444'}">
+                                        <i class="fas fa-${isConnected ? 'check-circle' : 'times-circle'}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    accountSelect.innerHTML = accountsHtml;
+                    
+                    // Add click handlers
+                    document.querySelectorAll('.account-option').forEach(option => {
+                        option.addEventListener('click', function() {
+                            // Remove selected class from all options
+                            document.querySelectorAll('.account-option').forEach(opt => {
+                                opt.classList.remove('selected');
+                            });
+                            
+                            // Add selected class to clicked option
+                            this.classList.add('selected');
+                            
+                            // Get account ID
+                            const accountId = this.getAttribute('data-account-id');
+                            const index = this.getAttribute('data-index');
+                            state.selectedAccount = state.accounts[index];
+                            
+                            // Update manual input
+                            manualAccountId.value = accountId;
+                            
+                            showNotification(`Selected account: ${state.selectedAccount.name || state.selectedAccount.login}`, 'info');
+                            debugLog(`Selected account: ${state.selectedAccount.id}`, state.selectedAccount);
+                        });
+                    });
+                    
+                    // Auto-select first connected account
+                    const firstConnected = accounts.find(acc => acc.connectionStatus === 'connected');
+                    if (firstConnected) {
+                        const index = accounts.findIndex(acc => acc.id === firstConnected.id);
+                        const option = document.querySelector(`.account-option[data-index="${index}"]`);
+                        if (option) {
+                            option.click();
+                        }
+                    }
+                    
+                    showNotification(`Found ${accounts.length} MT5 account(s)`, 'success');
+                    
+                } else {
+                    accountSelect.innerHTML = '<div class="no-data">No MT5 accounts found. Please add your account in MetaApi dashboard.</div>';
+                    showNotification('No MT5 accounts found. Please add your account in MetaApi dashboard first.', 'warning');
+                    debugLog('No accounts found');
                 }
                 
-                // Use first connected account
-                const account = accounts.find(acc => acc.connectionStatus === 'connected') || accounts[0];
-                state.account = await state.metaApi.metatraderAccountApi.getAccount(account.id);
+            } catch (error) {
+                console.error('Error loading accounts:', error);
+                debugLog('Error loading accounts:', error);
+                
+                let errorMessage = `Error loading accounts: ${error.message}`;
+                
+                // Provide helpful error messages
+                if (error.message.includes('401') || error.message.includes('unauthorized')) {
+                    errorMessage = 'Authentication failed. Please check your MetaApi token.';
+                } else if (error.message.includes('network') || error.message.includes('fetch')) {
+                    errorMessage = 'Network error. Please check your internet connection.';
+                }
+                
+                accountSelect.innerHTML = `<div class="no-data">${errorMessage}</div>`;
+                showNotification(errorMessage, 'error');
+            }
+        }
+        
+        // Connect to selected MT5 account
+        async function connectToSelectedAccount() {
+            let accountId = manualAccountId.value.trim();
+            
+            if (!accountId) {
+                if (state.selectedAccount) {
+                    accountId = state.selectedAccount.id;
+                } else {
+                    showNotification('Please select an account or enter an account ID', 'error');
+                    return;
+                }
+            }
+            
+            try {
+                updateStatus('connecting', 'Connecting to MT5...');
+                connectSelectedBtn.disabled = true;
+                debugLog(`Connecting to account: ${accountId}`);
+                
+                // Find account by ID
+                let account = state.accounts.find(acc => acc.id === accountId);
+                
+                if (!account) {
+                    // Try to get account directly
+                    debugLog(`Account ${accountId} not in cached list, fetching directly...`);
+                    account = await state.metaApi.metatraderAccountApi.getAccount(accountId);
+                    if (!account) {
+                        throw new Error(`Account ${accountId} not found`);
+                    }
+                    state.accounts.push(account);
+                    state.selectedAccount = account;
+                }
+                
+                state.account = account;
+                debugLog('Account object retrieved:', account);
                 
                 // Wait for connection
+                debugLog('Waiting for account connection...');
                 await state.account.waitConnected();
-                updateStatus('connected', `Connected to ${account.name}`);
+                debugLog('Account connected');
+                
+                // Deploy account if needed
+                if (state.account.state !== 'DEPLOYED') {
+                    debugLog('Account not deployed, deploying...');
+                    await state.account.deploy();
+                    await state.account.waitDeployed();
+                    debugLog('Account deployed');
+                }
                 
                 // Get connection
+                debugLog('Getting RPC connection...');
                 state.connection = state.account.getRPCConnection();
                 await state.connection.waitSynchronized();
+                debugLog('Connection synchronized');
                 
                 state.isConnected = true;
+                
+                // Update UI
+                currentAccountName.textContent = account.name || `Account ${account.login || account.id.substring(0, 8)}`;
+                connectedAccountId.textContent = account.id.substring(0, 12) + '...';
+                
+                // Switch to dashboard
+                accountSetup.classList.add('hidden');
+                mainDashboard.classList.remove('hidden');
+                
+                updateStatus('connected', `Connected to ${account.name || account.login}`);
                 
                 // Load account data
                 await loadAccountData();
                 
-                // Subscribe to price updates
-                await subscribeToPrices();
-                
-                // Start auto-updates
-                startAutoUpdates();
-                
                 // Enable trading buttons
                 buyBtn.disabled = false;
                 sellBtn.disabled = false;
-                refreshBtn.disabled = false;
+                refreshDataBtn.disabled = false;
                 generateSignalBtn.disabled = false;
                 closeAllBtn.disabled = false;
                 
-                showNotification('Successfully connected to MT5 account!', 'success');
+                showNotification(`Successfully connected to ${account.name || account.login}!`, 'success');
                 
             } catch (error) {
                 console.error('Connection error:', error);
+                debugLog('Connection error:', error);
                 updateStatus('error', `Connection failed: ${error.message}`);
-                showNotification(`Connection error: ${error.message}`, 'error');
-                connectBtn.disabled = false;
+                
+                let errorMessage = `Connection error: ${error.message}`;
+                
+                if (error.message.includes('deploy') || error.message.includes('DEPLOYED')) {
+                    errorMessage = 'Account deployment failed. Please check account status in MetaApi dashboard.';
+                } else if (error.message.includes('synchronized') || error.message.includes('sync')) {
+                    errorMessage = 'Account synchronization failed. Please try again.';
+                }
+                
+                showNotification(errorMessage, 'error');
+                connectSelectedBtn.disabled = false;
             }
         }
         
         // Load account data
         async function loadAccountData() {
             try {
-                if (!state.connection) return;
+                if (!state.connection) {
+                    debugLog('No connection available');
+                    return;
+                }
+                
+                debugLog('Loading account information...');
                 
                 // Get account information
                 const accountInfo = await state.connection.getAccountInformation();
                 state.accountInfo = accountInfo;
+                debugLog('Account info loaded:', accountInfo);
                 
                 // Update UI
-                accountBalanceEl.textContent = `$${accountInfo.balance.toFixed(2)}`;
-                accountEquityEl.textContent = `$${accountInfo.equity.toFixed(2)}`;
-                accountMarginEl.textContent = `$${accountInfo.margin.toFixed(2)}`;
-                freeMarginEl.textContent = `$${accountInfo.freeMargin.toFixed(2)}`;
+                accountBalanceEl.textContent = `$${accountInfo.balance?.toFixed(2) || '0.00'}`;
+                accountEquityEl.textContent = `$${accountInfo.equity?.toFixed(2) || '0.00'}`;
+                accountMarginEl.textContent = `$${accountInfo.margin?.toFixed(2) || '0.00'}`;
+                freeMarginEl.textContent = `$${accountInfo.freeMargin?.toFixed(2) || '0.00'}`;
                 
                 // Get positions
                 await updatePositions();
                 
-                // Generate initial signal
-                generateSignal();
+                // Start auto-updates
+                startAutoUpdates();
+                
+                debugLog('Account data loaded successfully');
                 
             } catch (error) {
                 console.error('Error loading account data:', error);
-            }
-        }
-        
-        // Subscribe to price updates
-        async function subscribeToPrices() {
-            try {
-                // Get current price for XAUUSD
-                const symbol = 'XAUUSD';
-                const quotes = await state.connection.getSymbols();
-                
-                if (quotes && quotes.includes(symbol)) {
-                    // Subscribe to price updates
-                    state.connection.subscribeToMarketData(symbol, (tick) => {
-                        updatePriceDisplay(tick);
-                    });
-                    
-                    // Get initial price
-                    const price = await state.connection.getSymbolPrice(symbol);
-                    if (price) {
-                        updatePriceDisplay(price);
-                    }
-                }
-                
-            } catch (error) {
-                console.error('Error subscribing to prices:', error);
-                // Fall back to simulation
-                startPriceSimulation();
+                debugLog('Error loading account data:', error);
+                showNotification(`Error loading account data: ${error.message}`, 'error');
             }
         }
         
         // Update positions list
         async function updatePositions() {
             try {
-                if (!state.connection) return;
+                if (!state.connection) {
+                    debugLog('No connection available for positions');
+                    return;
+                }
                 
+                debugLog('Loading positions...');
                 const positions = await state.connection.getPositions();
                 state.positions = positions;
+                debugLog(`Found ${positions.length} positions`, positions);
                 
                 // Update UI
                 if (positions.length === 0) {
@@ -1138,14 +1188,14 @@
                     positions.forEach(position => {
                         const pl = position.profit || 0;
                         const plClass = pl >= 0 ? 'profit' : 'loss';
-                        const typeClass = position.type.toLowerCase();
+                        const typeClass = position.type === 0 ? 'buy' : 'sell'; // 0 = buy, 1 = sell
                         
                         positionsHtml += `
                             <div class="position-item ${typeClass}">
                                 <div class="position-info">
                                     <div class="position-symbol">${position.symbol}</div>
                                     <div class="position-details">
-                                        ${position.type} • ${position.volume} lots • Opened: $${position.openPrice}
+                                        ${typeClass.toUpperCase()} • ${position.volume} lots • Opened: $${position.openPrice?.toFixed(2) || 'N/A'}
                                     </div>
                                 </div>
                                 <div class="position-pl ${plClass}">
@@ -1157,34 +1207,11 @@
                     positionsListEl.innerHTML = positionsHtml;
                 }
                 
-                // Update performance stats
-                updatePerformanceStats(positions);
-                
             } catch (error) {
                 console.error('Error updating positions:', error);
+                debugLog('Error updating positions:', error);
+                positionsListEl.innerHTML = '<div class="no-data">Error loading positions</div>';
             }
-        }
-        
-        // Update performance statistics
-        function updatePerformanceStats(positions) {
-            if (!positions || positions.length === 0) {
-                dailyPLEl.textContent = '$0.00';
-                winRateEl.textContent = '0%';
-                totalTradesEl.textContent = '0';
-                bestTradeEl.textContent = '$0.00';
-                return;
-            }
-            
-            const totalPL = positions.reduce((sum, pos) => sum + (pos.profit || 0), 0);
-            const winningTrades = positions.filter(pos => (pos.profit || 0) > 0).length;
-            const winRate = Math.round((winningTrades / positions.length) * 100);
-            const bestTrade = Math.max(...positions.map(pos => pos.profit || 0));
-            
-            dailyPLEl.textContent = `${totalPL >= 0 ? '+' : ''}$${totalPL.toFixed(2)}`;
-            dailyPLEl.className = `summary-value ${totalPL >= 0 ? 'profit' : 'loss'}`;
-            winRateEl.textContent = `${winRate}%`;
-            totalTradesEl.textContent = positions.length;
-            bestTradeEl.textContent = `$${bestTrade.toFixed(2)}`;
         }
         
         // Execute a trade
@@ -1197,35 +1224,33 @@
                 
                 const symbol = symbolSelect.value;
                 const volume = parseFloat(volumeInput.value) || 0.10;
-                const stopLoss = parseFloat(stopLossInput.value) || 50;
-                const takeProfit = parseFloat(takeProfitInput.value) || 30;
+                const stopLossPips = parseFloat(stopLossInput.value) || 50;
+                const takeProfitPips = parseFloat(takeProfitInput.value) || 30;
                 
-                // Calculate SL and TP prices
-                const currentPrice = state.lastPrice || await getCurrentPrice(symbol);
-                const point = 0.01; // For XAUUSD, 1 pip = 0.01
+                debugLog(`Executing ${type} trade:`, { symbol, volume, stopLossPips, takeProfitPips });
                 
-                let slPrice = 0, tpPrice = 0;
-                
-                if (type === 'buy') {
-                    slPrice = currentPrice - (stopLoss * point);
-                    tpPrice = currentPrice + (takeProfit * point);
-                } else {
-                    slPrice = currentPrice + (stopLoss * point);
-                    tpPrice = currentPrice - (takeProfit * point);
+                // Get current price
+                debugLog('Getting current price...');
+                const prices = await state.connection.getSymbolPrice(symbol);
+                if (!prices) {
+                    throw new Error(`Could not get price for ${symbol}`);
                 }
                 
-                // Create trade request
-                const tradeRequest = {
-                    action: 'POSITION_TYPE_BUY',
-                    symbol: symbol,
-                    volume: volume,
-                    stopLoss: slPrice,
-                    takeProfit: tpPrice,
-                    comment: `Web Scalping ${type.toUpperCase()}`,
-                    type: type === 'buy' ? 'ORDER_TYPE_BUY' : 'ORDER_TYPE_SELL'
-                };
+                const currentPrice = type === 'buy' ? prices.ask : prices.bid;
+                debugLog(`Current price: ${currentPrice}`);
+                
+                // Calculate SL and TP prices
+                const point = await getPointValue(symbol);
+                const slPrice = type === 'buy' 
+                    ? currentPrice - (stopLossPips * point)
+                    : currentPrice + (stopLossPips * point);
+                
+                const tpPrice = type === 'buy'
+                    ? currentPrice + (takeProfitPips * point)
+                    : currentPrice - (takeProfitPips * point);
                 
                 showNotification(`Executing ${type.toUpperCase()} order...`, 'info');
+                debugLog('Sending trade order...');
                 
                 // Execute trade via MetaApi
                 const result = await state.connection.createMarketOrder(
@@ -1237,32 +1262,38 @@
                     `Web Scalping ${type.toUpperCase()}`
                 );
                 
-                if (result && result.orderId) {
-                    showNotification(`${type.toUpperCase()} order executed successfully!`, 'success');
-                    
-                    // Add to signal log
-                    addSignal({
-                        type: type,
-                        symbol: symbol,
-                        entry: currentPrice,
-                        stopLoss: slPrice,
-                        takeProfit: tpPrice,
-                        volume: volume,
-                        time: new Date().toLocaleTimeString(),
-                        status: 'executed'
-                    });
+                debugLog('Trade result:', result);
+                
+                if (result && result.stringCode === 'TRADE_RETCODE_DONE') {
+                    showNotification(`${type.toUpperCase()} order executed successfully! Ticket: ${result.orderId}`, 'success');
                     
                     // Update positions
                     setTimeout(() => updatePositions(), 1000);
                     setTimeout(() => loadAccountData(), 1000);
                     
                 } else {
-                    throw new Error('Trade execution failed');
+                    throw new Error(`Trade execution failed: ${result?.stringCode || 'Unknown error'}`);
                 }
                 
             } catch (error) {
                 console.error('Trade execution error:', error);
+                debugLog('Trade execution error:', error);
                 showNotification(`Trade error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Get point value for symbol
+        async function getPointValue(symbol) {
+            // For XAUUSD, 1 pip = 0.01
+            if (symbol === 'XAUUSD') return 0.01;
+            
+            try {
+                // For other symbols, try to get from symbol specification
+                const symbolInfo = await state.connection.getSymbolSpecification(symbol);
+                return symbolInfo.tickSize || 0.0001;
+            } catch (error) {
+                debugLog(`Could not get point value for ${symbol}, using default`, error);
+                return 0.0001;
             }
         }
         
@@ -1281,7 +1312,7 @@
             const entry = currentPrice;
             const slPips = Math.floor(Math.random() * 100) + 20;
             const tpPips = Math.floor(Math.random() * 80) + 10;
-            const point = 0.01;
+            const point = symbol === 'XAUUSD' ? 0.01 : 0.0001;
             
             let stopLoss, takeProfit;
             
@@ -1302,93 +1333,15 @@
                 takeProfit: takeProfit,
                 volume: (Math.random() * 0.5 + 0.1).toFixed(2),
                 strength: strength,
-                confidence: Math.floor(Math.random() * 30) + 70, // 70-100%
+                confidence: Math.floor(Math.random() * 30) + 70,
                 time: new Date().toLocaleTimeString(),
                 status: 'pending'
             };
             
-            state.signals.unshift(signal);
-            
-            // Keep only last 6 signals
-            if (state.signals.length > 6) {
-                state.signals.pop();
-            }
-            
-            // Update signals display
-            updateSignalsDisplay();
-            
-            // If auto trading is enabled and signal is strong, execute it
-            if (state.isAutoTrading && strength === 'Strong' && symbol === 'XAUUSD') {
-                setTimeout(() => {
-                    executeTrade(type);
-                    signal.status = 'auto_executed';
-                    updateSignalsDisplay();
-                }, 2000);
-            }
+            debugLog('Generated signal:', signal);
+            showNotification(`New ${strength} ${type.toUpperCase()} signal generated for ${symbol}`, 'info');
             
             return signal;
-        }
-        
-        // Update signals display
-        function updateSignalsDisplay() {
-            if (state.signals.length === 0) {
-                signalsContainerEl.innerHTML = '<div class="no-data">No signals generated yet</div>';
-                return;
-            }
-            
-            let signalsHtml = '';
-            state.signals.forEach(signal => {
-                const typeClass = signal.type;
-                const pl = signal.type === 'buy' ? 
-                    ((signal.takeProfit - signal.entry) / 0.01 * 10 * signal.volume).toFixed(2) :
-                    ((signal.entry - signal.takeProfit) / 0.01 * 10 * signal.volume).toFixed(2);
-                
-                signalsHtml += `
-                    <div class="signal-card ${typeClass}">
-                        <div class="signal-header">
-                            <div class="signal-type ${typeClass}">
-                                <i class="fas fa-${signal.type === 'buy' ? 'arrow-up' : 'arrow-down'}"></i>
-                                ${signal.type.toUpperCase()} ${signal.symbol}
-                            </div>
-                            <div class="signal-time">${signal.time}</div>
-                        </div>
-                        <div class="signal-details">
-                            <div class="signal-detail">
-                                <span class="detail-label">Entry:</span>
-                                <span class="detail-value">$${signal.entry.toFixed(2)}</span>
-                            </div>
-                            <div class="signal-detail">
-                                <span class="detail-label">Stop Loss:</span>
-                                <span class="detail-value">$${signal.stopLoss.toFixed(2)}</span>
-                            </div>
-                            <div class="signal-detail">
-                                <span class="detail-label">Take Profit:</span>
-                                <span class="detail-value">$${signal.takeProfit.toFixed(2)}</span>
-                            </div>
-                            <div class="signal-detail">
-                                <span class="detail-label">Volume:</span>
-                                <span class="detail-value">${signal.volume} lots</span>
-                            </div>
-                            <div class="signal-detail">
-                                <span class="detail-label">Strength:</span>
-                                <span class="detail-value" style="color: ${signal.strength === 'Strong' ? '#44ff44' : signal.strength === 'Medium' ? '#ffaa00' : '#ff4444'}">
-                                    ${signal.strength}
-                                </span>
-                            </div>
-                            <div class="signal-detail">
-                                <span class="detail-label">Potential P/L:</span>
-                                <span class="detail-value" style="color: #44ff44;">$${pl}</span>
-                            </div>
-                        </div>
-                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); color: ${signal.status === 'executed' ? '#44ff44' : signal.status === 'auto_executed' ? '#00ccff' : '#ffaa00'};">
-                            <i class="fas fa-${signal.status === 'executed' ? 'check-circle' : signal.status === 'auto_executed' ? 'bolt' : 'clock'}"></i>
-                            ${signal.status === 'executed' ? 'Manually Executed' : signal.status === 'auto_executed' ? 'Auto-Executed' : 'Pending'}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            signalsContainerEl.innerHTML = signalsHtml;
         }
         
         // Initialize chart
@@ -1482,41 +1435,6 @@
             updatePriceDisplaySimulated(price);
         }
         
-        // Update price display from real data
-        function updatePriceDisplay(tick) {
-            if (!tick) return;
-            
-            const price = tick.bid || tick.ask || tick.last || 0;
-            state.lastPrice = price;
-            
-            // Update chart
-            state.priceData.push(price);
-            state.priceData.shift();
-            
-            // Update chart data
-            const now = new Date();
-            const labels = [];
-            for (let i = 60; i >= 0; i--) {
-                const time = new Date(now.getTime() - i * 60000);
-                labels.push(time.getHours().toString().padStart(2, '0') + ':' + time.getMinutes().toString().padStart(2, '0'));
-            }
-            
-            state.chart.data.labels = labels;
-            state.chart.data.datasets[0].data = state.priceData;
-            state.chart.update('none');
-            
-            // Update price display
-            livePriceEl.textContent = `$${price.toFixed(2)}`;
-            
-            // Calculate change
-            const openPrice = state.priceData[0];
-            const change = price - openPrice;
-            const changePercent = (change / openPrice * 100).toFixed(2);
-            
-            priceDetailsEl.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(2)} (${changePercent}%)`;
-            priceDetailsEl.style.color = change >= 0 ? '#44ff44' : '#ff4444';
-        }
-        
         // Simulated price updates (fallback)
         function startPriceSimulation() {
             setInterval(() => {
@@ -1561,31 +1479,39 @@
             priceDetailsEl.style.color = change >= 0 ? '#44ff44' : '#ff4444';
         }
         
-        // Get current price (simulated fallback)
-        async function getCurrentPrice(symbol) {
-            // In real implementation, this would come from MetaApi
-            return state.lastPrice || 2345.67;
-        }
-        
         // Start auto updates
         function startAutoUpdates() {
             if (state.updateInterval) clearInterval(state.updateInterval);
             
             state.updateInterval = setInterval(async () => {
                 if (state.isConnected) {
+                    debugLog('Auto-updating account data...');
                     await updatePositions();
                     await loadAccountData();
                 }
-            }, 10000); // Update every 10 seconds
+            }, 30000); // Update every 30 seconds
         }
         
         // Setup event listeners
         function setupEventListeners() {
-            // Connect button
-            connectBtn.addEventListener('click', connectToMT5);
+            // Connect selected account button
+            connectSelectedBtn.addEventListener('click', connectToSelectedAccount);
             
-            // Refresh button
-            refreshBtn.addEventListener('click', async () => {
+            // Refresh accounts button
+            refreshAccountsBtn.addEventListener('click', loadAccounts);
+            
+            // Switch account button
+            switchAccountBtn.addEventListener('click', () => {
+                mainDashboard.classList.add('hidden');
+                accountSetup.classList.remove('hidden');
+                disconnectAccount();
+            });
+            
+            // Disconnect button
+            disconnectBtn.addEventListener('click', disconnectAccount);
+            
+            // Refresh data button
+            refreshDataBtn.addEventListener('click', async () => {
                 if (state.isConnected) {
                     await loadAccountData();
                     showNotification('Data refreshed', 'info');
@@ -1595,7 +1521,6 @@
             // Generate signal button
             generateSignalBtn.addEventListener('click', () => {
                 generateSignal();
-                showNotification('New trading signal generated', 'info');
             });
             
             // Close all trades button
@@ -1607,10 +1532,12 @@
                 
                 if (confirm('Are you sure you want to close all positions?')) {
                     showNotification('Closing all positions...', 'info');
+                    debugLog('Closing all positions');
+                    
                     // In real implementation, close all positions via MetaApi
+                    // For now, simulate closing
                     setTimeout(() => {
                         showNotification('All positions closed (simulated)', 'success');
-                        // Clear positions
                         state.positions = [];
                         updatePositions();
                     }, 2000);
@@ -1621,56 +1548,47 @@
             buyBtn.addEventListener('click', () => executeTrade('buy'));
             sellBtn.addEventListener('click', () => executeTrade('sell'));
             
-            // Auto trading toggle
-            autoTradeToggle.addEventListener('change', function() {
-                state.isAutoTrading = this.checked;
-                
-                if (state.isAutoTrading) {
-                    showNotification('Auto trading enabled. Strong signals will be executed automatically.', 'success');
-                    // Start auto signal generation
-                    if (state.signalInterval) clearInterval(state.signalInterval);
-                    state.signalInterval = setInterval(() => {
-                        if (Math.random() > 0.5) generateSignal();
-                    }, 30000); // Generate signal every 30 seconds
-                } else {
-                    showNotification('Auto trading disabled', 'info');
-                    if (state.signalInterval) clearInterval(state.signalInterval);
-                }
-            });
-            
-            // Sliders
-            strengthSlider.addEventListener('input', function() {
-                const values = ['Weak', 'Medium', 'Strong'];
-                strengthValue.textContent = values[this.value - 1];
-            });
-            
-            maxTradesSlider.addEventListener('input', function() {
-                maxTradesValue.textContent = this.value;
-            });
-            
-            riskSlider.addEventListener('input', function() {
-                riskValue.textContent = this.value + '%';
-            });
-            
-            profitTargetSlider.addEventListener('input', function() {
-                profitTargetValue.textContent = '$' + this.value;
+            // Debug toggle
+            debugToggle.addEventListener('click', () => {
+                debugContent.classList.toggle('hidden');
             });
             
             // Keyboard shortcuts
             document.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && e.key === 'b') {
                     e.preventDefault();
-                    executeTrade('buy');
+                    if (!buyBtn.disabled) executeTrade('buy');
                 }
                 if (e.ctrlKey && e.key === 's') {
                     e.preventDefault();
-                    executeTrade('sell');
+                    if (!sellBtn.disabled) executeTrade('sell');
                 }
                 if (e.key === 'F5') {
                     e.preventDefault();
                     if (state.isConnected) loadAccountData();
                 }
             });
+        }
+        
+        // Disconnect from account
+        function disconnectAccount() {
+            if (state.updateInterval) clearInterval(state.updateInterval);
+            
+            state.isConnected = false;
+            state.account = null;
+            state.connection = null;
+            state.selectedAccount = null;
+            
+            updateStatus('disconnected', 'Disconnected from MT5');
+            
+            // Reset UI
+            currentAccountName.textContent = 'Not Connected';
+            connectedAccountId.textContent = 'Not connected';
+            buyBtn.disabled = true;
+            sellBtn.disabled = true;
+            
+            showNotification('Disconnected from MT5 account', 'info');
+            debugLog('Disconnected from account');
         }
         
         // Update status display
@@ -1690,6 +1608,9 @@
                     break;
                 case 'ready':
                     statusDot.style.background = '#ffaa00';
+                    break;
+                case 'disconnected':
+                    statusDot.style.background = '#ff4444';
                     break;
                 default:
                     statusDot.style.background = '#888';
@@ -1730,12 +1651,6 @@
                 case 'warning': return 'exclamation-triangle';
                 default: return 'info-circle';
             }
-        }
-        
-        // Add signal to log
-        function addSignal(signal) {
-            // This function adds signals to a more detailed log
-            console.log('Signal added:', signal);
         }
         
         // Initialize the application
