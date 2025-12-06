@@ -1,0 +1,6 @@
+flask==2.3.3
+flask-socketio==5.3.4
+flask-cors==4.0.0
+MetaTrader5==5.0.43
+pandas==2.0.3
+python-dotenv==1.0.0
