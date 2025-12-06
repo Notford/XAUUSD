@@ -812,56 +812,79 @@
                 </div>
             </div>
             
-            <div class="trading-panel">
-                <div class="panel-title">
-                    <i class="fas fa-trade"></i> Quick Trade
-                </div>
-                <div class="trade-form">
-                    <div class="form-group">
-                        <label for="symbolSelect">Symbol:</label>
-                        <select id="symbolSelect">
-                            <option value="XAUUSD">XAU/USD (Gold)</option>
-                            <option value="EURUSD">EUR/USD</option>
-                            <option value="GBPUSD">GBP/USD</option>
-                            <option value="USDJPY">USD/JPY</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="volumeInput">Volume (Lots):</label>
-                        <input type="number" id="volumeInput" min="0.01" max="10" step="0.01" value="0.10">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="stopLossInput">Stop Loss (pips):</label>
-                        <input type="number" id="stopLossInput" min="0" max="1000" step="1" value="50">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="takeProfitInput">Take Profit (pips):</label>
-                        <input type="number" id="takeProfitInput" min="0" max="1000" step="1" value="30">
-                    </div>
-                    
-                    <div class="trade-buttons">
-                        <button class="trade-btn buy-btn" id="buyBtn">
-                            <i class="fas fa-arrow-up"></i> BUY
-                        </button>
-                        <button class="trade-btn sell-btn" id="sellBtn">
-                            <i class="fas fa-arrow-down"></i> SELL
-                        </button>
-                    </div>
-                </div>
+            <!-- Auto-Trading Panel -->
+<div class="auto-trading-panel">
+    <div class="panel-title">
+        <i class="fas fa-robot"></i> Auto-Trading
+    </div>
+    
+    <div class="auto-trading-controls">
+        <div class="auto-trading-status">
+            <div class="status-indicator">
+                <div class="status-label">Auto-Trading:</div>
+                <div class="status-value" id="autoTradingStatus">Disabled</div>
             </div>
-            
-            <div class="signal-panel">
-                <div class="panel-title">
-                    <i class="fas fa-bell"></i> Live Trading Signals
-                </div>
-                <div class="signals-container" id="signalsContainer">
-                    <div class="no-data">Signals will appear here when generated</div>
-                </div>
+            <button class="toggle-btn" id="toggleAutoTrading">
+                <i class="fas fa-power-off"></i>
+                <span>Enable Auto-Trading</span>
+            </button>
+        </div>
+        
+        <div class="trading-stats">
+            <div class="stat-item">
+                <div class="stat-label">Today's Trades:</div>
+                <div class="stat-value" id="todayTrades">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Today's Profit:</div>
+                <div class="stat-value profit" id="todayProfit">$0.00</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Win Rate:</div>
+                <div class="stat-value" id="winRate">0%</div>
             </div>
         </div>
+        
+        <div class="signal-display" id="signalDisplay">
+            <div class="signal-header">
+                <div class="signal-label">Current Signal:</div>
+                <div class="signal-value" id="currentSignal">Analyzing...</div>
+            </div>
+            <div class="signal-details" id="signalDetails">
+                <!-- Signal details will be populated here -->
+            </div>
+        </div>
+        
+        <div class="auto-trading-settings">
+            <h4><i class="fas fa-cog"></i> Settings</h4>
+            <div class="setting-item">
+                <label for="tradeVolume">Trade Volume (Lots):</label>
+                <input type="number" id="tradeVolume" min="0.01" max="10" step="0.01" value="0.10">
+            </div>
+            <div class="setting-item">
+                <label for="stopLoss">Stop Loss (pips):</label>
+                <input type="number" id="stopLoss" min="10" max="200" step="5" value="50">
+            </div>
+            <div class="setting-item">
+                <label for="takeProfit">Take Profit (pips):</label>
+                <input type="number" id="takeProfit" min="10" max="200" step="5" value="30">
+            </div>
+            <button class="save-settings" id="saveSettings">
+                <i class="fas fa-save"></i> Save Settings
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Signals Panel -->
+<div class="signals-panel">
+    <div class="panel-title">
+        <i class="fas fa-history"></i> Recent Signals & Trades
+    </div>
+    <div class="signals-list" id="signalsList">
+        <div class="no-data">No signals yet. Enable auto-trading to see signals.</div>
+    </div>
+</div>
         
         <div class="scalping-controls" id="controlsPanel" style="display: none;">
             <button class="control-btn" id="refreshDataBtn">
